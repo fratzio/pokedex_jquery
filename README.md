@@ -1,2 +1,3 @@
-# cocktail_app_js
- Cocktail database app
+# pokemon_jquery_app
+
+A Pokemon db app using Jquery
