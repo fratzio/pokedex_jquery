@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pokedex db in Jquery</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap"
+      />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="page-header">
+      <h1 class="title">
+        Pokedex
+      </h1>
+    </div>
+    <div id="modal-container"></div>
+    <div class="page-body">
+      <div class="modal-container">
+        <ul class="pokemon-list">
+          <p class="loading-message-class">Loading Pokemon data</p>
+        </ul>
+      </div>
+    </div>
+    <!-- Footer with links to social media profiles -->
+    <div class="page-footer">
+      <p class="page-footer__item">
+        Find me on
+      </p>
+      <div class="page-footer__item social-container">
+        <a href="" class="social-container__item"><img src="img/github.svg"
+            alt="Github"
+            /></a>
+        <a href="" class="social-container__item"><img src="img/twitter.svg"
+            alt="Twitter"
+            /></a>
+        <a href="" class="social-container__item"><img src="img/linkedin.svg"
+            alt="LinkedIn"
+            /></a>
+      </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
