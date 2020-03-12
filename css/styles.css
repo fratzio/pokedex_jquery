@@ -86,26 +86,6 @@ li {
   padding: 5px;
 }
 
-.customButton {
-  border: 1px solid blue;
-  text-shadow: 1px 1px red;
-  text-decoration: none;
-  color: white;
-  background-color: black;
-  font-family: inherit;
-  width: 100%;
-  height: 80%;
-  padding: 10px;
-  font-size: 22px;
-}
-
-button:active {
-  text-shadow: 0.5px 0.5px blue;
-  background-color: yellow;
-  color: red;
-  box-shadow: 2px 2px black;
-}
-
 .page-footer {
   clear: both;
   background-color: red;
@@ -198,10 +178,6 @@ img {
   background: none;
   color: #777;
   text-decoration: underline;
-}
-
-.modal button:active {
-  background-color: transparent;
 }
 
 .modal h1 {
