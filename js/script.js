@@ -59,7 +59,7 @@ var pokemonRepository = (function() {
   // Add pokemon as a button in an unordered list
   function addListItem(pokemon) {
     var newListItem = $(
-      '<button class="list-group-item list-group-item-action" type="button" data-toggle="modal" data-target="#pokemonModal">' +
+      '<button class="list-group-item list-group-item-action list-group-item-dark" type="button" data-toggle="modal" sr-only="pokemon name" data-target="#pokemonModal">' +
         pokemon.name +
         "</button>"
     );

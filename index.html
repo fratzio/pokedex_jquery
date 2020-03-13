@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pokedex db in Jquery</title>
+    <title>Pokedex db in Jquery and Bootstrap</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -24,17 +24,17 @@
   <body>
     <!-- Modal  -->
     <div
-      class="modal fade"
+      class="modal fade "
       tabindex="-1"
       role="dialog"
       id="pokemonModal"
-      aria-labelledby=""
+      aria-labelledby="#pokemonModalLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog" role="document">
         <div class="modal-content bg-dark">
           <div class="modal-header">
-            <h5 class="modal-title"></h5>
+            <h2 class="modal-title" id="pokemonModalLabel"></h5>
             <button
               type="button"
               class="close"
@@ -45,8 +45,14 @@
             </button>
           </div>
           <div class="modal-body">
-            <img src="" class="img-fluid" />
-            <div class="modal-text"></div>
+            <div class="img-wrapper">
+              <img
+              src=""
+              class="img-fluid rounded mx-auto d-block"
+              alt="Responsive image"
+            />
+            </div>
+            <div class="modal-text text-center"></div>
           </div>
           <div class="modal-footer">
             <button
@@ -60,18 +66,48 @@
         </div>
       </div>
     </div>
-    <!-- header -->
-    <div class="page-header">
-      <h1 class="title">
-        Pokedex
-      </h1>
-    </div>
-    <!-- Centre of page -->
-    <div id="page-body">
-      <ul class="list-group"></ul>
-    </div>
+    <!-- Modal end -->
+    <!-- Navbar start -->
+    <nav
+      class="navbar navbar-light bg-light fixed-top page-header navbar-expand-md"
+    >
+      <span class="navbar-brand mb-0 h1">Pokedex</span>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Account <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Navbar end -->
+    <!-- Main start -->
+    <main class="container text-center" id="page-body">
+      <div class="row">
+        <div class="col-1"></div>
+        <ul class="list-group col-10"></ul>
+        <div class="col-1"></div>
+      </div>
+    </main>
+    <!-- Main end -->
     <!-- Footer with links to social media profiles -->
-    <div class="page-footer">
+    <nav class="navbar page-footer fixed-bottom">
       <p class="page-footer__item">
         Find me on
       </p>
@@ -86,7 +122,7 @@
           ><img src="img/linkedin.svg" alt="LinkedIn"
         /></a>
       </div>
-    </div>
+    </nav>
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
