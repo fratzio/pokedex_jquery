@@ -22,11 +22,51 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
   </head>
   <body>
+    <!-- Modal  -->
+    <div
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      id="pokemonModal"
+      aria-labelledby=""
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark">
+          <div class="modal-header">
+            <h5 class="modal-title"></h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="" class="img-fluid" />
+            <div class="modal-text"></div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header -->
     <div class="page-header">
       <h1 class="title">
         Pokedex
       </h1>
     </div>
+    <!-- Centre of page -->
     <div id="modal-container"></div>
     <div class="page-body">
       <div class="modal-container">

@@ -64,7 +64,7 @@ var pokemonRepository = (function() {
   function addListItem(pokemon) {
     var $listItem = $("<li></li>");
     var $button = $(
-      '<button class="btn btn-outline-warning btn-block">' +
+      '<button class="btn btn-outline-warning btn-block" data-toggle="modal" data-target="#pokemonModal">' +
         pokemon.name +
         "</button>"
     );
@@ -116,66 +116,16 @@ var pokemonRepository = (function() {
 
   // Modal //
   // grab modal container
-  var $modalContainer = $("#modal-container");
+
+  // var $modalContainer = $("#modal-dialog");
 
   function showModal(title, text, url) {
-    //Clear all existing modal content
-    $modalContainer.empty();
-    // create new modal
-    var modal = $('<div class="modal"></div>');
-
-    // Add new modal content
-    // button
-    var closeButtonElement = $(
-      '<button class="modal-close">' + "close" + "</button>"
-    );
-    // close modal
-    closeButtonElement.on("click", hideModal);
-
-    // title
-    var titleElement = $("<h1>" + title + "</h1>");
-    // wrap body content in a div
-    var bodyWrapper = $('<div class="body-element"></div>');
-    // paragraph element
-    var contentElement = $('<p class="modal-p">' + text + "</p>");
-
-    // img
-    var imgWrapper = $('<div class="img-element"></div>');
-    var imgElement = $("<img>");
-    imgElement.attr("src", url);
-
-    // attach to DOM
-    bodyWrapper.append(closeButtonElement);
-    bodyWrapper.append(titleElement);
-    bodyWrapper.append(contentElement);
-    imgWrapper.append(imgElement);
-    modal.append(bodyWrapper);
-    modal.append(imgWrapper);
-    $modalContainer.append(modal);
-
-    // add class to show element
-    $modalContainer.addClass("is-visible");
+    // How to empty????
+    // $("#pokemonModal .modal-content").empty();
+    $("#pokemonModal .modal-title").text(title);
+    $("#pokemonModal .modal-text").text(text);
+    $("#pokemonModal .modal-body img").attr("src", url);
   }
-
-  // hide modal
-  function hideModal() {
-    // grab modal (parent element)
-    $modalContainer.removeClass("is-visible");
-  }
-  // closing modal with esc button
-  $(window).on("keydown", e => {
-    if (e.key === "Escape" && $modalContainer.hasClass("is-visible")) {
-      hideModal();
-    }
-  });
-
-  $modalContainer.on("click", e => {
-    // listens to clicks on container
-    var $target = e.target;
-    if ($target === $modalContainer) {
-      hideModal();
-    }
-  });
 
   /* 
     Server side function
