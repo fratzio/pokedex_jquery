@@ -3,6 +3,10 @@ var pokemonRepository = (function() {
   // Pokemon repo
   var repository = [];
 
+  /* Server side functions */
+
+  // Adding pokemon to the repository
+
   /* External API */
   // 1 call for whole dump of Pokemon
   var apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
@@ -52,6 +56,22 @@ var pokemonRepository = (function() {
   // Adding them to the internal repo
   function add(pokemon) {
     repository.push(pokemon);
+  }
+
+  // search for a Pokemon
+  function search(nameSearch) {
+    var result = repository.filter(word => word.name === nameSearch);
+    if (result.length > 0) {
+      console.log("Here is your Pokemon:" + "<br>");
+      return result;
+      // // return the complete object of the relative Pokemon
+      // Object.keys(result[0]).forEach(function(property) {
+      //   console.log("<br>" + property + ": " + result[0][property]);
+      // });
+      // return "There's a match!";
+    } else {
+      return "There is no Pokemon with that name in the repo";
+    }
   }
 
   /* Client side functions */
@@ -110,26 +130,6 @@ var pokemonRepository = (function() {
     $("#pokemonModal .modal-title").text(title);
     $("#pokemonModal .modal-text").text(text);
     $("#pokemonModal .modal-body img").attr("src", url);
-  }
-
-  /* Server side functions */
-
-  // Adding pokemon to the repository
-
-  // search for a Pokemon
-  function search(nameSearch) {
-    var result = repository.filter(word => word.name === nameSearch);
-    if (result.length > 0) {
-      console.log("Here is your Pokemon:" + "<br>");
-      return result;
-      // // return the complete object of the relative Pokemon
-      // Object.keys(result[0]).forEach(function(property) {
-      //   console.log("<br>" + property + ": " + result[0][property]);
-      // });
-      // return "There's a match!";
-    } else {
-      return "There is no Pokemon with that name in the repo";
-    }
   }
 
   // return complete repository
