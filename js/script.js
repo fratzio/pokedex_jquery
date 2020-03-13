@@ -7,8 +7,7 @@ var pokemonRepository = (function() {
   // 1 call for whole dump of Pokemon
   var apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
-  // fetching the pokemon payloads from the API call
-
+  // fetching the pokemon payloads from the API call and storing the pokemon's name and URL
   function loadList() {
     return $.ajax(apiUrl, {
       dataType: "json"
@@ -29,7 +28,7 @@ var pokemonRepository = (function() {
       });
   }
 
-  // load details of pokemon
+  // load details of pokemon by calling the pokemon's URL specifically
   function loadDetails(item) {
     var url = item.detailsUrl;
     return $.ajax(url, {
@@ -42,7 +41,6 @@ var pokemonRepository = (function() {
         // loop through types
         item.types = "";
         responseJSON.types.forEach(function(result) {
-          console.log(result.type.name);
           item.types += result.type.name + " ";
         });
       })
@@ -56,25 +54,17 @@ var pokemonRepository = (function() {
     repository.push(pokemon);
   }
 
-  /*
-    Client side functions
-    */
+  /* Client side functions */
 
-  // function that displays pokemon as buttons on the page
+  // Add pokemon as a button in an unordered list
   function addListItem(pokemon) {
-    var $listItem = $("<li></li>");
-    var $button = $(
-      '<button class="btn btn-outline-warning btn-block" data-toggle="modal" data-target="#pokemonModal">' +
+    var newListItem = $(
+      '<button class="list-group-item list-group-item-action" type="button" data-toggle="modal" data-target="#pokemonModal">' +
         pokemon.name +
         "</button>"
     );
-    // Add button to li item
-    $listItem.append($button);
-    // Add list element to the DOM via the ul parent
-    $newList.append($listItem);
-    // Add event listener to button element
-    $button.on("click", () => {
-      showLoadingMessage();
+    $(".list-group").append(newListItem);
+    $(newListItem).on("click", function() {
       showDetails(pokemon);
     });
   }
@@ -96,7 +86,6 @@ var pokemonRepository = (function() {
   }
 
   // loading icon function
-
   function showLoadingMessage() {
     // target loading class
     var $loading = $(".loading-message-class");
@@ -115,10 +104,6 @@ var pokemonRepository = (function() {
   }
 
   // Modal //
-  // grab modal container
-
-  // var $modalContainer = $("#modal-dialog");
-
   function showModal(title, text, url) {
     // How to empty????
     // $("#pokemonModal .modal-content").empty();
@@ -127,9 +112,7 @@ var pokemonRepository = (function() {
     $("#pokemonModal .modal-body img").attr("src", url);
   }
 
-  /* 
-    Server side function
-    */
+  /* Server side functions */
 
   // Adding pokemon to the repository
 
@@ -138,24 +121,23 @@ var pokemonRepository = (function() {
     var result = repository.filter(word => word.name === nameSearch);
     if (result.length > 0) {
       console.log("Here is your Pokemon:" + "<br>");
-      // return the complete object of the relative Pokemon
-      Object.keys(result[0]).forEach(function(property) {
-        console.log("<br>" + property + ": " + result[0][property]);
-      });
-      return "There's a match!";
+      return result;
+      // // return the complete object of the relative Pokemon
+      // Object.keys(result[0]).forEach(function(property) {
+      //   console.log("<br>" + property + ": " + result[0][property]);
+      // });
+      // return "There's a match!";
     } else {
       return "There is no Pokemon with that name in the repo";
     }
   }
 
   // return complete repository
-
   function getALL() {
     return repository;
   }
 
   // return public methods in IIFE object
-
   return {
     getALL: getALL,
     loadList: loadList,
@@ -168,7 +150,6 @@ var pokemonRepository = (function() {
   };
 })();
 
-var $newList = $("ul");
 pokemonRepository.showLoadingMessage();
 // Creating list of Pokemon and then load them to page
 pokemonRepository.loadList().then(function() {
