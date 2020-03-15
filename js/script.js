@@ -64,11 +64,6 @@ var pokemonRepository = (function() {
     if (result.length > 0) {
       console.log("Here is your Pokemon:" + "<br>");
       return result;
-      // // return the complete object of the relative Pokemon
-      // Object.keys(result[0]).forEach(function(property) {
-      //   console.log("<br>" + property + ": " + result[0][property]);
-      // });
-      // return "There's a match!";
     } else {
       return "There is no Pokemon with that name in the repo";
     }
