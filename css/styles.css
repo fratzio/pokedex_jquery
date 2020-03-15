@@ -1,5 +1,8 @@
 /*
 Colours used:
+black: #000000;
+red: #FF0000;
+white: #FFFFFF;
 */
 
 /* Start Main layout Styling */
@@ -10,7 +13,7 @@ body {
   color: white;
   font-weight: 550;
   line-height: 1.6;
-  font-family: "Bangers", "cursive";
+  font-family: 'Bangers', 'cursive';
 }
 
 .list-group {
