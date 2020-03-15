@@ -9,12 +9,12 @@ var pokemonRepository = (function() {
 
   /* External API */
   // 1 call for whole dump of Pokemon
-  var apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+  var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   // fetching the pokemon payloads from the API call and storing the pokemon's name and URL
   function loadList() {
     return $.ajax(apiUrl, {
-      dataType: "json"
+      dataType: 'json'
     })
       .then(function(responseJSON) {
         var payl = responseJSON.results;
@@ -28,7 +28,7 @@ var pokemonRepository = (function() {
         });
       })
       .catch(function(err) {
-        console.log("Caught an error:" + err.statusText);
+        console.log('Caught an error:' + err.statusText);
       });
   }
 
@@ -36,16 +36,16 @@ var pokemonRepository = (function() {
   function loadDetails(item) {
     var url = item.detailsUrl;
     return $.ajax(url, {
-      dataType: "json"
+      dataType: 'json'
     })
       .then(function(responseJSON) {
         // Now we add the details to the item
         item.imageUrl = responseJSON.sprites.front_default;
         item.height = responseJSON.height;
         // loop through types
-        item.types = "";
+        item.types = '';
         responseJSON.types.forEach(function(result) {
-          item.types += result.type.name + " ";
+          item.types += result.type.name + ' ';
         });
       })
       .catch(function(e) {
@@ -62,10 +62,10 @@ var pokemonRepository = (function() {
   function search(nameSearch) {
     var result = repository.filter(word => word.name === nameSearch);
     if (result.length > 0) {
-      console.log("Here is your Pokemon:" + "<br>");
+      console.log('Here is your Pokemon:' + '<br>');
       return result;
     } else {
-      return "There is no Pokemon with that name in the repo";
+      return 'There is no Pokemon with that name in the repo';
     }
   }
 
@@ -76,10 +76,10 @@ var pokemonRepository = (function() {
     var newListItem = $(
       '<button class="list-group-item list-group-item-action list-group-item-dark" type="button" data-toggle="modal" sr-only="pokemon name" data-target="#pokemonModal">' +
         pokemon.name +
-        "</button>"
+        '</button>'
     );
-    $(".list-group").append(newListItem);
-    $(newListItem).on("click", function() {
+    $('.list-group').append(newListItem);
+    $(newListItem).on('click', function() {
       showDetails(pokemon);
     });
   }
@@ -88,13 +88,13 @@ var pokemonRepository = (function() {
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function() {
       var bodyContent =
-        "Height: " +
-        "\n" +
+        'Height: ' +
+        '\n' +
         pokemon.height +
-        "\n" +
-        "Types: " +
+        '\n' +
+        'Types: ' +
         pokemon.types +
-        "\n";
+        '\n';
       showModal(pokemon.name, bodyContent, pokemon.imageUrl);
       hideLoadingMessage();
     });
@@ -103,18 +103,18 @@ var pokemonRepository = (function() {
   // loading icon function
   function showLoadingMessage() {
     // target loading class
-    var $loading = $(".loading-message-class");
+    var $loading = $('.loading-message-class');
     // Add CSS style to show loading message
-    $loading.addClass("shown");
+    $loading.addClass('shown');
   }
 
   function hideLoadingMessage() {
     // target loading class
-    var $loading = $(".loading-message-class");
+    var $loading = $('.loading-message-class');
     // wait 2 seconds for visual's sake
     setTimeout(function() {
       // Add CSS style to hide loading message
-      $loading.removeClass("shown");
+      $loading.removeClass('shown');
     }, 500);
   }
 
@@ -122,9 +122,9 @@ var pokemonRepository = (function() {
   function showModal(title, text, url) {
     // How to empty????
     // $("#pokemonModal .modal-content").empty();
-    $("#pokemonModal .modal-title").text(title);
-    $("#pokemonModal .modal-text").text(text);
-    $("#pokemonModal .modal-body img").attr("src", url);
+    $('#pokemonModal .modal-title').text(title);
+    $('#pokemonModal .modal-text').text(text);
+    $('#pokemonModal .modal-body img').attr('src', url);
   }
 
   // return complete repository
