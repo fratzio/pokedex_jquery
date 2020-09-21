@@ -1,5 +1,5 @@
 // Create IIFF for app
-var pokemonRepository = (function() {
+var pokemonRepository = (function () {
   // Pokemon repo
   var repository = [];
 
@@ -14,21 +14,36 @@ var pokemonRepository = (function() {
   // fetching the pokemon payloads from the API call and storing the pokemon's name and URL
   function loadList() {
     return $.ajax(apiUrl, {
-      dataType: 'json'
+      dataType: 'json',
     })
-      .then(function(responseJSON) {
+      .then(function (responseJSON) {
         var payl = responseJSON.results;
-        payl.forEach(function(item) {
+        payl.forEach(function (item) {
           var pokemon = {
             name: item.name,
-            detailsUrl: item.url
+            detailsUrl: item.url,
           };
           // pushes pokemon to repository
           add(pokemon);
         });
       })
-      .catch(function(err) {
-        console.log('Caught an error:' + err.statusText);
+      .catch(function (e) {
+        console.log('Caught an error:' + e.statusText);
+      })
+      .then(function () {
+        // Add event listener for searchbar that toggles class on or off if there is a match
+        var searchInput = $('#searchbar');
+        searchInput.on('keyup', function () {
+          // grab the value of the input and make it all lowercase to match repo
+          var value = $(this).val().toLowerCase();
+          // create an array with all pokemon items and filters through, toggling if there is a match with indexOf(value)
+          $('.list-group-item').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+          });
+        });
+      })
+      .catch((e) => {
+        console.log(`Caught an error: ${e.statusText}`);
       });
   }
 
@@ -36,19 +51,19 @@ var pokemonRepository = (function() {
   function loadDetails(item) {
     var url = item.detailsUrl;
     return $.ajax(url, {
-      dataType: 'json'
+      dataType: 'json',
     })
-      .then(function(responseJSON) {
+      .then(function (responseJSON) {
         // Now we add the details to the item
         item.imageUrl = responseJSON.sprites.front_default;
         item.height = responseJSON.height;
         // loop through types
         item.types = '';
-        responseJSON.types.forEach(function(result) {
+        responseJSON.types.forEach(function (result) {
           item.types += result.type.name + ' ';
         });
       })
-      .catch(function(e) {
+      .catch(function (e) {
         console.error(e);
       });
   }
@@ -60,7 +75,7 @@ var pokemonRepository = (function() {
 
   // search for a Pokemon
   function search(nameSearch) {
-    var result = repository.filter(word => word.name === nameSearch);
+    var result = repository.filter((word) => word.name === nameSearch);
     if (result.length > 0) {
       console.log('Here is your Pokemon:' + '<br>');
       return result;
@@ -79,14 +94,14 @@ var pokemonRepository = (function() {
         '</button>'
     );
     $('.list-group').append(newListItem);
-    $(newListItem).on('click', function() {
+    $(newListItem).on('click', function () {
       showDetails(pokemon);
     });
   }
 
   // function to log details of pokemon
   function showDetails(pokemon) {
-    loadDetails(pokemon).then(function() {
+    loadDetails(pokemon).then(function () {
       var bodyContent =
         'Height: ' +
         '\n' +
@@ -103,18 +118,18 @@ var pokemonRepository = (function() {
   // loading icon function
   function showLoadingMessage() {
     // target loading class
-    var $loading = $('.loading-message-class');
+    var loading = $('.loading-message-class');
     // Add CSS style to show loading message
-    $loading.addClass('shown');
+    loading.addClass('shown');
   }
 
   function hideLoadingMessage() {
     // target loading class
-    var $loading = $('.loading-message-class');
+    var loading = $('.loading-message-class');
     // wait 2 seconds for visual's sake
-    setTimeout(function() {
+    setTimeout(function () {
       // Add CSS style to hide loading message
-      $loading.removeClass('shown');
+      loading.removeClass('shown');
     }, 500);
   }
 
@@ -141,14 +156,14 @@ var pokemonRepository = (function() {
     addListItem: addListItem,
     showDetails: showDetails,
     showLoadingMessage: showLoadingMessage,
-    hideLoadingMessage: hideLoadingMessage
+    hideLoadingMessage: hideLoadingMessage,
   };
 })();
 
 pokemonRepository.showLoadingMessage();
 // Creating list of Pokemon and then load them to page
-pokemonRepository.loadList().then(function() {
-  pokemonRepository.getALL().forEach(function(pokemon) {
+pokemonRepository.loadList().then(function () {
+  pokemonRepository.getALL().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
   });
 });
